@@ -1,0 +1,12 @@
+node_modules/
+.env
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/
+.idea/
+dist/
+coverage/
+
+# 开发设计文档
+./dev/*

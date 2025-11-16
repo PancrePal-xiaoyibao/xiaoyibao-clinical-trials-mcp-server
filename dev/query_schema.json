@@ -1,0 +1,714 @@
+object
+Single line description
+{
+nextPageToken: string
+studies*: [{
+Array of studies: study field values of type markup are in markdown format.
+
+protocolSection: {
+identificationModule: {
+nctId: string
+NCT number
+
+Constraints: 11 to 11 chars
+nctIdAliases: [string]
+⮕ [ NCT number ]
+
+Constraints: 11 to 11 chars
+orgStudyIdInfo: {
+id: string
+type: enum
+Allowed: NIH┃FDA┃VA┃CDC┃AHRQ┃SAMHSA
+link: string
+}
+secondaryIdInfos: [{
+id: string
+type: enum
+Allowed: NIH┃FDA┃VA┃CDC┃AHRQ┃SAMHSA┃OTHER_GRANT┃EUDRACT_NUMBER┃CTIS┃REGISTRY┃OTHER
+domain: string
+link: string
+}]
+briefTitle: string
+officialTitle: string
+acronym: string
+organization: {
+fullName: string
+class: enum
+Allowed: NIH┃FED┃OTHER_GOV┃INDIV┃INDUSTRY┃NETWORK┃AMBIG┃OTHER┃UNKNOWN
+}
+}
+statusModule: {
+statusVerifiedDate: string
+Date in yyyy, yyyy-MM, or yyyy-MM-dd format
+
+overallStatus: enum
+Allowed: ACTIVE_NOT_RECRUITING┃COMPLETED┃ENROLLING_BY_INVITATION┃NOT_YET_RECRUITING┃RECRUITING┃SUSPENDED┃TERMINATED┃WITHDRAWN┃AVAILABLE┃NO_LONGER_AVAILABLE┃TEMPORARILY_NOT_AVAILABLE┃APPROVED_FOR_MARKETING┃WITHHELD┃UNKNOWN
+lastKnownStatus: enum
+Allowed: ACTIVE_NOT_RECRUITING┃COMPLETED┃ENROLLING_BY_INVITATION┃NOT_YET_RECRUITING┃RECRUITING┃SUSPENDED┃TERMINATED┃WITHDRAWN┃AVAILABLE┃NO_LONGER_AVAILABLE┃TEMPORARILY_NOT_AVAILABLE┃APPROVED_FOR_MARKETING┃WITHHELD┃UNKNOWN
+delayedPosting: boolean
+whyStopped: string
+expandedAccessInfo: {
+hasExpandedAccess: boolean
+nctId: string
+NCT number
+
+Constraints: 11 to 11 chars
+statusForNctId: enum
+Allowed: AVAILABLE┃NO_LONGER_AVAILABLE┃TEMPORARILY_NOT_AVAILABLE┃APPROVED_FOR_MARKETING
+}
+startDateStruct: {
+date: string
+Date in yyyy, yyyy-MM, or yyyy-MM-dd format
+
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+primaryCompletionDateStruct: {
+date: string
+Date in yyyy, yyyy-MM, or yyyy-MM-dd format
+
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+completionDateStruct: {
+date: string
+Date in yyyy, yyyy-MM, or yyyy-MM-dd format
+
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+studyFirstSubmitDate: date
+studyFirstSubmitQcDate: date
+studyFirstPostDateStruct: {
+date: date
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+resultsWaived: boolean
+resultsFirstSubmitDate: date
+resultsFirstSubmitQcDate: date
+resultsFirstPostDateStruct: {
+date: date
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+dispFirstSubmitDate: date
+dispFirstSubmitQcDate: date
+dispFirstPostDateStruct: {
+date: date
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+lastUpdateSubmitDate: date
+lastUpdatePostDateStruct: {
+date: date
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+}
+sponsorCollaboratorsModule: {
+responsibleParty: {
+type: enum
+Allowed: SPONSOR┃PRINCIPAL_INVESTIGATOR┃SPONSOR_INVESTIGATOR
+investigatorFullName: string
+investigatorTitle: string
+investigatorAffiliation: string
+oldNameTitle: string
+oldOrganization: string
+}
+leadSponsor: {
+name: string
+class: enum
+Allowed: NIH┃FED┃OTHER_GOV┃INDIV┃INDUSTRY┃NETWORK┃AMBIG┃OTHER┃UNKNOWN
+}
+collaborators: [{
+name: string
+class: enum
+Allowed: NIH┃FED┃OTHER_GOV┃INDIV┃INDUSTRY┃NETWORK┃AMBIG┃OTHER┃UNKNOWN
+}]
+}
+oversightModule: {
+oversightHasDmc: boolean
+isFdaRegulatedDrug: boolean
+isFdaRegulatedDevice: boolean
+isUnapprovedDevice: boolean
+isPpsd: boolean
+isUsExport: boolean
+fdaaa801Violation: boolean
+}
+descriptionModule: {
+briefSummary: string
+detailedDescription: string
+}
+conditionsModule: {
+conditions: [string]
+keywords: [string]
+}
+designModule: {
+studyType: enum
+Allowed: EXPANDED_ACCESS┃INTERVENTIONAL┃OBSERVATIONAL
+nPtrsToThisExpAccNctId: integer
+expandedAccessTypes: {
+individual: boolean
+intermediate: boolean
+treatment: boolean
+}
+patientRegistry: boolean
+targetDuration: string
+Pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
+phases: [enum]
+Allowed: NA┃EARLY_PHASE1┃PHASE1┃PHASE2┃PHASE3┃PHASE4
+designInfo: {
+allocation: enum
+Allowed: RANDOMIZED┃NON_RANDOMIZED┃NA
+interventionModel: enum
+Allowed: SINGLE_GROUP┃PARALLEL┃CROSSOVER┃FACTORIAL┃SEQUENTIAL
+interventionModelDescription: string
+primaryPurpose: enum
+Allowed: TREATMENT┃PREVENTION┃DIAGNOSTIC┃ECT┃SUPPORTIVE_CARE┃SCREENING┃HEALTH_SERVICES_RESEARCH┃BASIC_SCIENCE┃DEVICE_FEASIBILITY┃OTHER
+observationalModel: enum
+Allowed: COHORT┃CASE_CONTROL┃CASE_ONLY┃CASE_CROSSOVER┃ECOLOGIC_OR_COMMUNITY┃FAMILY_BASED┃DEFINED_POPULATION┃NATURAL_HISTORY┃OTHER
+timePerspective: enum
+Allowed: RETROSPECTIVE┃PROSPECTIVE┃CROSS_SECTIONAL┃OTHER
+maskingInfo: {
+masking: enum
+Allowed: NONE┃SINGLE┃DOUBLE┃TRIPLE┃QUADRUPLE
+maskingDescription: string
+whoMasked: [enum]
+Allowed: PARTICIPANT┃CARE_PROVIDER┃INVESTIGATOR┃OUTCOMES_ASSESSOR
+}
+}
+bioSpec: {
+retention: enum
+Allowed: NONE_RETAINED┃SAMPLES_WITH_DNA┃SAMPLES_WITHOUT_DNA
+description: string
+}
+enrollmentInfo: {
+count: integer
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+}
+armsInterventionsModule: {
+armGroups: [{
+label: string
+type: enum
+Allowed: EXPERIMENTAL┃ACTIVE_COMPARATOR┃PLACEBO_COMPARATOR┃SHAM_COMPARATOR┃NO_INTERVENTION┃OTHER
+description: string
+interventionNames: [string]
+}]
+interventions: [{
+type: enum
+Allowed: BEHAVIORAL┃BIOLOGICAL┃COMBINATION_PRODUCT┃DEVICE┃DIAGNOSTIC_TEST┃DIETARY_SUPPLEMENT┃DRUG┃GENETIC┃PROCEDURE┃RADIATION┃OTHER
+name: string
+description: string
+armGroupLabels: [string]
+otherNames: [string]
+}]
+}
+outcomesModule: {
+primaryOutcomes: [{
+measure: string
+description: string
+timeFrame: string
+}]
+secondaryOutcomes: [{
+measure: string
+description: string
+timeFrame: string
+}]
+otherOutcomes: [{
+measure: string
+description: string
+timeFrame: string
+}]
+}
+eligibilityModule: {
+eligibilityCriteria: string
+healthyVolunteers: boolean
+sex: enum
+Allowed: FEMALE┃MALE┃ALL
+genderBased: boolean
+genderDescription: string
+minimumAge: string
+Pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
+maximumAge: string
+Pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
+stdAges: [enum]
+Allowed: CHILD┃ADULT┃OLDER_ADULT
+studyPopulation: string
+samplingMethod: enum
+Allowed: PROBABILITY_SAMPLE┃NON_PROBABILITY_SAMPLE
+}
+contactsLocationsModule: {
+centralContacts: [{
+name: string
+role: enum
+Allowed: STUDY_CHAIR┃STUDY_DIRECTOR┃PRINCIPAL_INVESTIGATOR┃SUB_INVESTIGATOR┃CONTACT
+phone: string
+phoneExt: string
+email: string
+}]
+overallOfficials: [{
+name: string
+affiliation: string
+role: enum
+Allowed: STUDY_CHAIR┃STUDY_DIRECTOR┃PRINCIPAL_INVESTIGATOR┃SUB_INVESTIGATOR
+}]
+locations: [{
+facility: string
+status: enum
+Allowed: ACTIVE_NOT_RECRUITING┃COMPLETED┃ENROLLING_BY_INVITATION┃NOT_YET_RECRUITING┃RECRUITING┃SUSPENDED┃TERMINATED┃WITHDRAWN┃AVAILABLE
+city: string
+State/province or city name
+
+state: string
+State/province or city name
+
+zip: string
+country: string
+contacts: [{
+name: string
+role: enum
+Allowed: STUDY_CHAIR┃STUDY_DIRECTOR┃PRINCIPAL_INVESTIGATOR┃SUB_INVESTIGATOR┃CONTACT
+phone: string
+phoneExt: string
+email: string
+}]
+geoPoint: {
+lat*: number
+lon*: number
+}
+}]
+}
+referencesModule: {
+references: [{
+pmid: string
+type: enum
+Allowed: BACKGROUND┃RESULT┃DERIVED
+citation: string
+retractions: [{
+pmid: string
+source: string
+}]
+}]
+seeAlsoLinks: [{
+label: string
+url: string
+}]
+availIpds: [{
+id: string
+type: string
+url: string
+comment: string
+}]
+}
+ipdSharingStatementModule: {
+ipdSharing: enum
+Allowed: YES┃NO┃UNDECIDED
+description: string
+infoTypes: [enum]
+Allowed: STUDY_PROTOCOL┃SAP┃ICF┃CSR┃ANALYTIC_CODE
+timeFrame: string
+accessCriteria: string
+url: string
+}
+}
+resultsSection: {
+participantFlowModule: {
+preAssignmentDetails: string
+recruitmentDetails: string
+typeUnitsAnalyzed: string
+groups: [{
+id: string
+title: string
+description: string
+}]
+periods: [{
+title: string
+milestones: [{
+type: string
+comment: string
+achievements: [{
+groupId: string
+comment: string
+numSubjects: string
+numUnits: string
+}]
+}]
+dropWithdraws: [{
+type: string
+comment: string
+reasons: [{
+groupId: string
+comment: string
+numSubjects: string
+numUnits: string
+}]
+}]
+}]
+}
+baselineCharacteristicsModule: {
+populationDescription: string
+typeUnitsAnalyzed: string
+groups: [{
+id: string
+title: string
+description: string
+}]
+denoms: [{
+units: string
+counts: [{
+groupId: string
+value: string
+}]
+}]
+measures: [{
+title: string
+description: string
+populationDescription: string
+paramType: enum
+Allowed: GEOMETRIC_MEAN┃GEOMETRIC_LEAST_SQUARES_MEAN┃LEAST_SQUARES_MEAN┃LOG_MEAN┃MEAN┃MEDIAN┃NUMBER┃COUNT_OF_PARTICIPANTS┃COUNT_OF_UNITS
+dispersionType: enum
+Allowed: NA┃STANDARD_DEVIATION┃STANDARD_ERROR┃INTER_QUARTILE_RANGE┃FULL_RANGE┃CONFIDENCE_80┃CONFIDENCE_90┃CONFIDENCE_95┃CONFIDENCE_975┃CONFIDENCE_99┃CONFIDENCE_OTHER┃GEOMETRIC_COEFFICIENT
+unitOfMeasure: string
+calculatePct: boolean
+denomUnitsSelected: string
+denoms: [{
+units: string
+counts: [{
+groupId: string
+value: string
+}]
+}]
+classes: [{
+title: string
+denoms: [{
+units: string
+counts: [{
+groupId: string
+value: string
+}]
+}]
+categories: [{
+title: string
+measurements: [{
+groupId: string
+value: string
+spread: string
+lowerLimit: string
+upperLimit: string
+comment: string
+}]
+}]
+}]
+}]
+}
+outcomeMeasuresModule: {
+outcomeMeasures: [{
+type: enum
+Allowed: PRIMARY┃SECONDARY┃OTHER_PRE_SPECIFIED┃POST_HOC
+title: string
+description: string
+populationDescription: string
+reportingStatus: enum
+Allowed: NOT_POSTED┃POSTED
+anticipatedPostingDate: string
+Date in yyyy, yyyy-MM, or yyyy-MM-dd format
+
+paramType: enum
+Allowed: GEOMETRIC_MEAN┃GEOMETRIC_LEAST_SQUARES_MEAN┃LEAST_SQUARES_MEAN┃LOG_MEAN┃MEAN┃MEDIAN┃NUMBER┃COUNT_OF_PARTICIPANTS┃COUNT_OF_UNITS
+dispersionType: string
+unitOfMeasure: string
+calculatePct: boolean
+timeFrame: string
+typeUnitsAnalyzed: string
+denomUnitsSelected: string
+groups: [{
+id: string
+title: string
+description: string
+}]
+denoms: [{
+units: string
+counts: [{
+groupId: string
+value: string
+}]
+}]
+classes: [{
+title: string
+denoms: [{
+units: string
+counts: [{
+groupId: string
+value: string
+}]
+}]
+categories: [{
+title: string
+measurements: [{
+groupId: string
+value: string
+spread: string
+lowerLimit: string
+upperLimit: string
+comment: string
+}]
+}]
+}]
+analyses: [{
+paramType: string
+paramValue: string
+dispersionType: enum
+Allowed: STANDARD_DEVIATION┃STANDARD_ERROR_OF_MEAN
+dispersionValue: string
+statisticalMethod: string
+statisticalComment: string
+pValue: string
+pValueComment: string
+ciNumSides: enum
+Allowed: ONE_SIDED┃TWO_SIDED
+ciPctValue: string
+ciLowerLimit: string
+ciUpperLimit: string
+ciLowerLimitComment: string
+ciUpperLimitComment: string
+estimateComment: string
+testedNonInferiority: boolean
+nonInferiorityType: enum
+Allowed: SUPERIORITY┃NON_INFERIORITY┃EQUIVALENCE┃OTHER┃NON_INFERIORITY_OR_EQUIVALENCE┃SUPERIORITY_OR_OTHER┃NON_INFERIORITY_OR_EQUIVALENCE_LEGACY┃SUPERIORITY_OR_OTHER_LEGACY
+nonInferiorityComment: string
+otherAnalysisDescription: string
+groupDescription: string
+groupIds: [string]
+}]
+}]
+}
+adverseEventsModule: {
+frequencyThreshold: string
+timeFrame: string
+description: string
+allCauseMortalityComment: string
+eventGroups: [{
+id: string
+title: string
+description: string
+deathsNumAffected: integer
+deathsNumAtRisk: integer
+seriousNumAffected: integer
+seriousNumAtRisk: integer
+otherNumAffected: integer
+otherNumAtRisk: integer
+}]
+seriousEvents: [{
+term: string
+organSystem: string
+sourceVocabulary: string
+assessmentType: enum
+Allowed: NON_SYSTEMATIC_ASSESSMENT┃SYSTEMATIC_ASSESSMENT
+notes: string
+stats: [{
+groupId: string
+numEvents: integer
+numAffected: integer
+numAtRisk: integer
+}]
+}]
+otherEvents: [{
+term: string
+organSystem: string
+sourceVocabulary: string
+assessmentType: enum
+Allowed: NON_SYSTEMATIC_ASSESSMENT┃SYSTEMATIC_ASSESSMENT
+notes: string
+stats: [{
+groupId: string
+numEvents: integer
+numAffected: integer
+numAtRisk: integer
+}]
+}]
+}
+moreInfoModule: {
+limitationsAndCaveats: {
+description: string
+}
+certainAgreement: {
+piSponsorEmployee: boolean
+restrictionType: enum
+Allowed: LTE60┃GT60┃OTHER
+restrictiveAgreement: boolean
+otherDetails: string
+}
+pointOfContact: {
+title: string
+organization: string
+email: string
+phone: string
+phoneExt: string
+}
+}
+}
+annotationSection: {
+annotationModule: {
+unpostedAnnotation: {
+unpostedResponsibleParty: string
+unpostedEvents: [{
+type: enum
+Allowed: RESET┃RELEASE┃UNRELEASE
+date: date
+dateUnknown: boolean
+}]
+}
+violationAnnotation: {
+violationEvents: [{
+type: enum
+Allowed: VIOLATION_IDENTIFIED┃CORRECTION_CONFIRMED┃PENALTY_IMPOSED┃ISSUES_IN_LETTER_ADDRESSED_CONFIRMED
+description: string
+creationDate: date
+issuedDate: date
+releaseDate: date
+postedDate: date
+}]
+}
+}
+}
+documentSection: {
+largeDocumentModule: {
+noSap: boolean
+largeDocs: [{
+typeAbbrev: string
+hasProtocol: boolean
+hasSap: boolean
+hasIcf: boolean
+label: string
+date: date
+uploadDate: string
+Date and time in yyyy-MM-dd'T'HH:mm format
+
+filename: string
+size: integer
+}]
+}
+}
+derivedSection: {
+miscInfoModule: {
+versionHolder: date
+removedCountries: [string]
+submissionTracking: {
+estimatedResultsFirstSubmitDate: date
+firstMcpInfo: {
+postDateStruct: {
+date: date
+type: enum
+Allowed: ACTUAL┃ESTIMATED
+}
+}
+submissionInfos: [{
+releaseDate: date
+unreleaseDate: date
+unreleaseDateUnknown: boolean
+resetDate: date
+mcpReleaseN: integer
+}]
+}
+}
+conditionBrowseModule: {
+meshes: [{
+id: string
+term: string
+}]
+ancestors: [{
+id: string
+term: string
+}]
+browseLeaves: [{
+id: string
+name: string
+asFound: string
+relevance: enum
+Allowed: LOW┃HIGH
+}]
+browseBranches: [{
+abbrev: string
+name: string
+}]
+}
+interventionBrowseModule: {
+meshes: [{
+id: string
+term: string
+}]
+ancestors: [{
+id: string
+term: string
+}]
+browseLeaves: [{
+id: string
+name: string
+asFound: string
+relevance: enum
+Allowed: LOW┃HIGH
+}]
+browseBranches: [{
+abbrev: string
+name: string
+}]
+}
+}
+hasResults: boolean
+}]
+totalCount: integer
+}
+get
+/studies/{nctId}
+Single Study
+Single Study
+Returns data of a single study.
+
+REQUEST
+PATH PARAMETERS
+* nctId
+string
+Pattern: ^[Nn][Cc][Tt]0*[1-9]\d{0,7}$
+NCT Number of a study. If found in NCTIdAlias field, 301 HTTP redirect to the actual study will be returned.
+
+Examples: NCT00841061 ┃ NCT04000165
+QUERY-STRING PARAMETERS
+format
+enum
+Default: json
+Allowed: csv ┃ json ┃ json.zip ┃ fhir.json ┃ ris
+Must be one of the following:
+
+csv- return CSV table; available fields are listed on CSV Download
+json- return JSON object; format of markup fields depends on markupFormat parameter
+json.zip- put JSON object into a .json file and download it as zip archive; field values of type markup are in markdown format
+fhir.json - return FHIR JSON; fields are not customizable; see Access Data in FHIR
+ris- return RIS record; available tags are listed on RIS Download
+markupFormat
+enum
+Default: markdown
+Allowed: markdown ┃ legacy
+Format of markup type fields:
+
+markdown- markdown format
+legacy- compatible with classic PRS
+Applicable only to json format.
+
+fields
+array of string
+add-multiple ↩
+Min 1 item
+If specified, must be non-empty comma- or pipe-separated list of fields to return. If unspecified, all fields will be returned. Order of the fields does not matter.
+
+For csv format, specify list of columns. The column names are available on CSV Download.
+
+For json and json.zip formats, every list item is either area name, piece name, or field name. If a piece or a field is a branch node, all descendant fields will be included. All area names are available on Search Areas, the piece and field names - on Data Structure and also can be retrieved at /studies/metadata endpoint.
+
+For fhir.json format, all available fields are returned and this parameter must be unspecified.
+
+For ris format, specify list of tags. The tag names are available on RIS Download.
+
+Examples: [ NCTId, BriefTitle, Reference ] ┃ [ ConditionsModule, EligibilityModule ]

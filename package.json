@@ -1,0 +1,52 @@
+{
+  "name": "xiaoyibao-clinical-trials",
+  "version": "1.0.0",
+  "description": "MCP server developed by xiao-x-bao for ng clinical trials from ClinicalTrials.gov API v2. Supports searching by keywords, disease, location with intelligent defaults (recruiting trials from past 3 months).",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "xiaoyibao-clinical-trials": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node src/test.js",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "clinical-trials",
+    "clinicaltrials-gov",
+    "medical",
+    "healthcare",
+    "research",
+    "api",
+    "llm",
+    "ai"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/xiaoyibao-clinical-trials.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/xiaoyibao-clinical-trials/issues"
+  },
+  "homepage": "https://github.com/yourusername/xiaoyibao-clinical-trials#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "README_CN.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "zod": "^3.25.76"
+  }
+}
