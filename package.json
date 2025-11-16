@@ -1,7 +1,7 @@
 {
   "name": "xiaoyibao-clinical-trials",
   "version": "1.0.0",
-  "description": "MCP server developed by xiao-x-bao for ng clinical trials from ClinicalTrials.gov API v2. Supports searching by keywords, disease, location with intelligent defaults (recruiting trials from past 3 months).",
+  "description": "MCP server developed by [xiao-x-bao community](https://info.xiao-x-bao.com.cn) for clinical trials from ClinicalTrials.gov API v2. Supports searching by keywords, disease, location with intelligent defaults (recruiting trials from past 3 months).",
   "type": "module",
   "main": "src/index.js",
   "bin": {

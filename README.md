@@ -209,3 +209,5 @@ MIT
 ## Contributing
 
 Contributions welcome! Please open an issue or submit a pull request.
+
+Speical thanks to the contribution & development of [Xiaoyibao-Pancrepal](www.xiaoyibao.com.cn) & [xiao-x-bao community](https://info.xiao-x-bao.com.cn) to support cancer/rare disease patients and their families with ❤️ & AI！
