@@ -208,3 +208,5 @@ MIT
 ## 贡献
 
 欢迎贡献！请提交 issue 或 pull request。
+
+特别感谢[小胰宝](www.xiaoyibao.com.cn)和 [小x宝社区](https://info.xiao-x-bao.com.cn)的贡献与付出，用爱心与人工智能为癌症/罕见病患者及其家庭提供支持！

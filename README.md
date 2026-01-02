@@ -168,6 +168,18 @@ Includes all search fields plus:
 - `primaryOutcomes[]`, `secondaryOutcomes[]` - Study endpoints
 - `briefSummary`, `detailedDescription` - Full study description
 
+## Toolchain Prompt Guidance
+
+- **Purpose**: Provide LLMs with a clear playbook for combining MCP tools (search → details → structured answer) in real clinical-query workflows.
+- **Prompt files**:
+  - `CLINICAL_TRIALS_PROMPT_REFERENCE.md`: full version with detailed scenarios和说明。
+  - `CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md`: 精简版，适合作为 MCP 客户端的 system / developer prompt 使用（推荐）。
+- **Typical usage**:
+  - 对于问题如 “查询 GFH276 的临床信息，浙江有哪些医院可以申请”，LLM 应按照提示词中的链路：
+    - 先用 `search_clinical_trials` 通过关键词和国家筛选得到 NCT 编号；
+    - 再用 `get_trial_details` 查询该 NCT 的详细信息和地点；
+    - 最后按文档中的四段式结构（结论先行 → 依据与说明 → 重点提示 → 风险&渠道提醒）输出给患者/家属。
+
 ## API Reference
 
 - [ClinicalTrials.gov API Documentation](https://clinicaltrials.gov/data-api/api)
@@ -178,7 +190,7 @@ Includes all search fields plus:
 
 ```bash
 # Clone repository
-git clone git@github.com:PancrePal-xiaoyibao/xiaoyibao-clinical-trials-mcp-server.git
+git clone https://github.com/PancrePal-xiaoyibao/xiaoyibao-clinical-trials-mcp-server.git
 
 cd xiaoyibao-clinical-trials-mcp-server
 
