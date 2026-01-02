@@ -168,6 +168,69 @@ npm install -g xiaoyibao-clinical-trials
 - `primaryOutcomes[]`, `secondaryOutcomes[]` - 研究终点
 - `briefSummary`, `detailedDescription` - 完整研究描述
 
+## 工具链提示词指南
+
+为了确保 LLM 在调用本 MCP 服务时的 **稳定性、准确性和用户体验**，我们提供了专门的工具链提示词文档。这些提示词不仅是可选参考，而是 **使用本服务的必要基础**。
+
+### 为什么需要工具链提示词？
+
+- **稳定性**：提示词规范了工具调用顺序（先搜索 → 再详情 → 最后结构化输出），避免 LLM 的随意调用导致查询效率低或结果混乱。
+- **准确性**：通过明确的参数选择规则和地点筛选逻辑，确保搜索结果与患者问题高度匹配（如 GFH276 + 浙江医院这类地域敏感问题）。
+- **用户体验**：统一的四段式输出结构（结论先行 → 依据与说明 → 重点提示 → 风险&渠道提醒），帮助患者/家属快速理解、规避风险、获得后续支持渠道。
+
+### 提示词文件与使用方法
+
+#### 1. 快速版本（推荐用于生产环境）
+- **文件**：[`CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md`](./CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md)  
+- **用途**：作为 MCP 客户端（如 Claude Desktop）的 **system prompt / developer prompt** 直接使用。  
+- **优点**：精简有力，包含所有核心规则和场景，避免 token 浪费。  
+- **使用步骤**：
+  1. 将文件内容复制或引用到你的 LLM system prompt 中；
+  2. LLM 会自动按照提示词中的工具链规则调用 `search_clinical_trials` 和 `get_trial_details`；
+  3. 输出会自动按四段式结构组织，适合患者/家属阅读。
+
+#### 2. 完整版本（参考与文档用）
+- **文件**：[`CLINICAL_TRIALS_PROMPT_REFERENCE.md`](./CLINICAL_TRIALS_PROMPT_REFERENCE.md)  
+- **用途**：更详细的说明和补充场景，用于开发者理解或自定义扩展。  
+- **何时使用**：
+  - 需要理解工具链的完整设计思路；
+  - 要添加新的临床查询场景；
+  - 团队内部培训或文档参考。
+
+### 典型使用场景
+
+**场景 1：查询 GFH276 + 浙江可申请医院**
+```
+患者问题 → 搜索 GFH276（关键词）+ 中国（国家）
+       → 获得 NCT 编号（如 NCT07198321）
+       → 查询该 NCT 的详细信息和医院地点
+       → 筛选城市属于浙江的医院（杭州/宁波/温州等）
+       → 按四段式结构输出给患者
+```
+
+**场景 2：搜索患者附近的临床试验**
+```
+患者问题（含城市或经纬度）→ 用 search_by_location 或 search_clinical_trials（city 参数）
+                      → 列出所在城市或附近的试验
+                      → 对关键试验调用 get_trial_details
+                      → 按四段式结构输出
+```
+
+### 集成建议
+
+- **Claude Desktop 用户**：将 `CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md` 的内容粘贴到你的 Claude Desktop 自定义 system prompt 中，或在会话开始时告诉 Claude 参考该文件。
+- **其他 MCP 客户端**：根据客户端的 system prompt / instruction 配置方式，集成提示词内容。
+- **API 调用者**：如果你通过 API 使用本 MCP，建议在 system prompt 参数中包含压缩版本的工具链提示词，确保每次调用都遵循规范。
+
+### 关键承诺
+
+我们承诺 **工具链提示词的长期稳定性**。在更新时，会：
+- 保持核心规则的向后兼容性；
+- 在 git commit 中明确标注 breaking changes（若有）；
+- 提供迁移指南和版本对照说明。
+
+欢迎反馈问题或建议改进！可通过 GitHub issue 或「小胰宝助手」公众号联系我们。
+
 ## API 参考
 
 - [ClinicalTrials.gov API 文档](https://clinicaltrials.gov/data-api/api)
@@ -178,7 +241,7 @@ npm install -g xiaoyibao-clinical-trials
 
 ```bash
 # 克隆仓库
-git clone git@github.com:PancrePal-xiaoyibao/xiaoyibao-clinical-trials-mcp-server.git
+git clone https://github.com/PancrePal-xiaoyibao/xiaoyibao-clinical-trials-mcp-server.git
 cd xiaoyibao-clinical-trials-mcp-server
 
 # 安装依赖

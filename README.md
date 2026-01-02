@@ -170,15 +170,66 @@ Includes all search fields plus:
 
 ## Toolchain Prompt Guidance
 
-- **Purpose**: Provide LLMs with a clear playbook for combining MCP tools (search → details → structured answer) in real clinical-query workflows.
-- **Prompt files**:
-  - `CLINICAL_TRIALS_PROMPT_REFERENCE.md`: full version with detailed scenarios和说明。
-  - `CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md`: 精简版，适合作为 MCP 客户端的 system / developer prompt 使用（推荐）。
-- **Typical usage**:
-  - 对于问题如 “查询 GFH276 的临床信息，浙江有哪些医院可以申请”，LLM 应按照提示词中的链路：
-    - 先用 `search_clinical_trials` 通过关键词和国家筛选得到 NCT 编号；
-    - 再用 `get_trial_details` 查询该 NCT 的详细信息和地点；
-    - 最后按文档中的四段式结构（结论先行 → 依据与说明 → 重点提示 → 风险&渠道提醒）输出给患者/家属。
+To ensure **stability, accuracy, and user experience** when calling this MCP service, we provide dedicated toolchain prompt documentation. These prompts are not just optional references—they are **essential foundations** for using this service effectively.
+
+### Why Toolchain Prompts Matter
+
+- **Stability**: Prompts standardize tool-calling sequences (search → details → structured output), preventing LLM from making arbitrary calls that result in low efficiency or messy results.
+- **Accuracy**: Clear parameter-selection rules and location-filtering logic ensure search results match patient questions precisely (e.g., drug name + province like GFH276 + Zhejiang hospitals).
+- **User Experience**: A unified four-part output structure (conclusion first → evidence & explanation → key tips → risks & channel reminders) helps patients/families understand quickly, avoid risks, and find next-step support.
+
+### Prompt Files & Usage Methods
+
+#### 1. Compact Version (Recommended for Production)
+- **File**: [`CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md`](./CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md)  
+- **Purpose**: Use directly as the **system prompt / developer prompt** for MCP clients (e.g., Claude Desktop).  
+- **Benefits**: Concise and powerful; contains all core rules and scenarios; minimizes token waste.  
+- **How to use**:
+  1. Copy or reference the file content into your LLM's system prompt.
+  2. LLM will automatically call `search_clinical_trials` and `get_trial_details` following the toolchain rules.
+  3. Output will auto-organize into the four-part structure, optimized for patient/family reading.
+
+#### 2. Full Version (Reference & Documentation)
+- **File**: [`CLINICAL_TRIALS_PROMPT_REFERENCE.md`](./CLINICAL_TRIALS_PROMPT_REFERENCE.md)  
+- **Purpose**: Detailed explanations and additional scenarios for developers to understand or customize.  
+- **When to use**:
+  - Need to understand the full toolchain design philosophy.
+  - Adding new clinical query scenarios.
+  - Team training or documentation reference.
+
+### Typical Usage Scenarios
+
+**Scenario 1: Query GFH276 + Zhejiang Hospitals**
+```
+Patient question → Search GFH276 (keyword) + China (country)
+             → Get NCT number (e.g., NCT07198321)
+             → Query trial details & hospital locations
+             → Filter hospitals in Zhejiang cities (Hangzhou/Ningbo/Wenzhou, etc.)
+             → Output in four-part structure
+```
+
+**Scenario 2: Find Trials Near Patient**
+```
+Patient question (with city or coordinates) → Use search_by_location or search_clinical_trials (city param)
+                                        → List trials in patient's city/nearby
+                                        → Call get_trial_details for key trials
+                                        → Output in four-part structure
+```
+
+### Integration Recommendations
+
+- **Claude Desktop Users**: Paste `CLINICAL_TRIALS_PROMPT_REFERENCE_COMPACT.md` content into your Claude Desktop custom system prompt, or reference the file at conversation start.
+- **Other MCP Clients**: Based on your client's system prompt / instruction configuration, integrate the prompt content accordingly.
+- **API Callers**: If using this MCP via API, include the compact prompt version in your system prompt parameter to ensure every call follows the standard.
+
+### Commitment to Stability
+
+We commit to **long-term stability of toolchain prompts**. When updating:
+- Backward compatibility of core rules is maintained.
+- Breaking changes (if any) are clearly marked in git commits.
+- Migration guides and version cross-reference docs are provided.
+
+Welcome feedback or improvement suggestions! Contact us via GitHub issue or the "XiaoYiBao Assistant" WeChat official account.
 
 ## API Reference
 
